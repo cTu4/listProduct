@@ -17,8 +17,8 @@
           {{product.rating}}
         </span>
       </div>
-      <div :class="$style.miniBasket">
-
+      <div :class="[$style.miniBasket, {'active': product.inBasket} ]" @click="addToBasket(product)">
+        <img class="basketImg" src="@/images/cart.png" alt="">
       </div>
 
     </div>
@@ -38,6 +38,17 @@ export default {
   },
   mounted() {
     console.log(this.products)
+  },
+  methods:{
+    addToBasket(product){
+        let basket = this.$store.getters['basket/basket'];
+        let index = basket.findIndex(basketItem => basketItem.id == product.id)
+        console.log(index)
+        if(index === -1){
+          product.inBasket = true;
+          this.$store.dispatch('basket/add',product);
+        }
+    }
   }
 }
 </script>
@@ -71,8 +82,8 @@ export default {
   }
   .product .rating{
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 10px;
+    left: 10px;
     font-weight: bold;
     font-size: 10px;
     line-height: 13px;
@@ -81,7 +92,12 @@ export default {
   }
   .product .miniBasket{
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 10px;
+    right: 10px;
+    opacity: 0.2;
+    cursor: pointer;
+  }
+  .product .miniBasket img{
+    width: 50%;
   }
 </style>

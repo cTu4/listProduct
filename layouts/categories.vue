@@ -23,7 +23,7 @@
 export default {
   data(){
     return{
-      BasketIsOpen: true
+      BasketIsOpen: false
     }
   },
   methods:{

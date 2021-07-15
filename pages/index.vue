@@ -29,5 +29,6 @@ export default {
       font-style: normal;
       background: #FFFFFF;
       width: 100%;
+      margin: 0;
     }
 </style>
