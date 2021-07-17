@@ -64,7 +64,7 @@ export default {
     color: #59606D;
   }
   .basketProducts .list{
-    max-height: 360px;
+    max-height: 340px;
     overflow-y: scroll;
     margin: 0 -10px;
     padding: 0 10px;
@@ -75,7 +75,7 @@ export default {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    height: 80px;
+    height: 100px;
     box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.05);
     border-radius: 8px;
   }

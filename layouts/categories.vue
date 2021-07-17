@@ -14,8 +14,9 @@
     </div>
 
 
-    <basket @clickOutSide="EventBasket" :show="BasketIsOpen">
-    </basket>
+    <basketWrap @clickOutSide="EventBasket" :show="BasketIsOpen">
+    </basketWrap>
+
   </div>
 </template>
 

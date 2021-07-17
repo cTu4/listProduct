@@ -5,7 +5,7 @@
 
     <ul :class="$style.listCategories">
       <li :class="$style.listItem" v-for="category in categories" :key="category.id">
-        <nuxt-link active-class="active" :to="{ path: '/categories/'+category.id, query: { category: category }}">
+        <nuxt-link active-class="active" :to="{ path: '/'+category.id}">
           {{category.name}}
         </nuxt-link>
       </li>

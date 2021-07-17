@@ -2,7 +2,7 @@
   <div :class="$style.products">
     <div :class="$style.product" v-for="product in products" :key="product.id">
 
-      <img :src="'https://frontend-test.idaproject.com' + product.photo" alt="">
+      <img :class="$style.prodcutImg" :src="'https://frontend-test.idaproject.com' + product.photo" alt="">
       <div :class="$style.name">
         {{product.name}}
       </div>
@@ -66,6 +66,9 @@ export default {
   }
   .product img{
       width: 100%;
+  }
+  .prodcutImg{
+
   }
   .product .name{
     font-weight: normal;

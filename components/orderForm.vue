@@ -24,9 +24,12 @@
       <input
         placeholder="Телефон"
         v-model="phone"
-        type="number"
+        type="text"
+        v-mask="'+7 (###) ###-##-##'"
         :class="[$v.phone.$dirty && (!$v.phone.required || !$v.phone.phoneValid)?$style.invalid:'']"
       >
+
+
       <small
         :class="$style.textInvalid"
         v-if="$v.phone.$dirty && !$v.phone.required">
@@ -58,6 +61,11 @@
         :class="$style.btnBasket"
       >
     </form>
+
+    <div :class="[modal?'show':'']" class="alert alert-success alert-dismissible fade">
+      <strong>Ваш заказ отправлен!</strong>
+      <div type="button" class="close" @click="modal=!modal" data-dismiss="alert">&times;</div>
+    </div>
   </div>
 </template>
 
@@ -87,7 +95,8 @@ export default {
       return{
         name:"",
         phone: "",
-        address:""
+        address:"",
+        modal: false
       }
   },
   directives: {
@@ -100,8 +109,22 @@ export default {
         console.log(this.$v, this.name)
         return
       }
+      else{
+        this.name = "";
+        this.phone = "";
+        this.address = "";
+        this.modal = true;
+        this.$v.$reset();
+        this.$store.dispatch('basket/clear');
+        this.$emit('order');
+        setTimeout(()=>{
+          this.modal = false;
+        }, 2000);
 
-    },
+
+      }
+
+    }
   },
   created(){
     console.log(this.$v)

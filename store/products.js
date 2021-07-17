@@ -10,6 +10,7 @@ export  const mutations = {
 
 export const actions = {
   async fetch({commit}, data){
+    console.log(data.category_id)
     const products = await this.$axios.get('https://frontend-test.idaproject.com/api/product?category='+data.category_id);
     commit("setProducts", products.data);
   }

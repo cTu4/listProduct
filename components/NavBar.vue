@@ -1,11 +1,11 @@
 <template>
   <div :class="$style.NavBar">
-    <div :class="$style.list">
+    <nuxt-link to="/" :class="$style.list">
       TestList
-    </div>
+    </nuxt-link>
     <div @click="basket" :class="$style.basket">
       <img class="basketImg" src="@/images/cart.png" alt="">
-      <div :class="$style.number">3</div>
+      <div v-show="items !== 0" :class="$style.number">{{items}}</div>
     </div>
 
   </div>
@@ -16,7 +16,14 @@ export default {
   name: "NavBar",
   data(){
     return{
-      BasketIsOpen: false
+      BasketIsOpen: false,
+    }
+  },
+  computed:{
+    items(){
+      let basket = this.$store.getters['basket/basket'];
+      console.log(basket.length !== 0)
+      return basket.length;
     }
   },
   methods:{

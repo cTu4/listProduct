@@ -9,6 +9,9 @@ export  const mutations = {
   deleteFromBasket(state,product){
     let index = state.basket.findIndex(basketItem => basketItem.id == product.id)
     state.basket.splice(index, 1)
+  },
+  clearBasket(state){
+    state.basket = [];
   }
 }
 
@@ -18,6 +21,9 @@ export const actions = {
   },
   delete({commit}, product){
     commit("deleteFromBasket", product);
+  },
+  clear({commit}){
+    commit("clearBasket");
   }
 
 }
