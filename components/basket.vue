@@ -3,11 +3,11 @@
     :class="$style.fillBasket"
     v-click-outside="externalClick"
   >
-    <div v-if="!order">
+    <div :class="$style.order"  v-if="!order">
       <basketProducts :products="basket"></basketProducts>
       <orderForm @order="orderSuccess"></orderForm>
     </div>
-      <orderSuccess v-else></orderSuccess>
+    <orderSuccess v-else></orderSuccess>
   </div>
 </template>
 
@@ -33,7 +33,7 @@ export default {
   methods:{
     orderSuccess(){
       this.order = true;
-      this.$emit('order')
+      this.$emit('orderSuccess')
     },
     externalClick(){
         this.order = false;
@@ -46,9 +46,12 @@ export default {
 }
 </script>
 
-<style module>
+<style lang="scss" module>
   .fillBasket{
     height: 100%;
     display: flex;
+    .order{
+      width: 100%;
+    }
   }
 </style>

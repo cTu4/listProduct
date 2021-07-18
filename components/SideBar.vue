@@ -4,8 +4,8 @@
   <nav :class="$style.SideBar">
 
     <ul :class="$style.listCategories">
-      <li :class="$style.listItem" v-for="category in categories" :key="category.id">
-        <nuxt-link active-class="active" :to="{ path: '/'+category.id}">
+      <li :class="$style.listItem" v-for="(category,index) in categories" :key="category.id">
+        <nuxt-link :class="!$route.params.id && index===0? $style.active:''" :active-class="$style.active" :to="{ path: '/'+category.id}">
           {{category.name}}
         </nuxt-link>
       </li>
@@ -24,9 +24,12 @@ export default {
 }
 </script>
 
-<style module>
+<style lang="scss" module>
   .SideBar{
     min-width: 190px;
+    background: $bar-bg-color;
+    display: flex;
+    flex-direction: column;
   }
 
   .listCategories{
@@ -38,14 +41,14 @@ export default {
     font-weight: normal;
     font-size: 16px;
     line-height: 21px;
+    a{
+      color: #59606D;
+      text-decoration: none;
+      &.active{
+        color: #1F1F1F;
+        text-decoration: underline;
+      }
+    }
+  }
 
-  }
-  .listItem a{
-    color: #59606D;
-    text-decoration: none;
-  }
-  .listItem a.active{
-    color: #1F1F1F;
-    text-decoration: underline;
-  }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div
-    v-show="show"
+
     v-click-outside="externalClick"
-    :class="$style.basketWrap">
+    :class="[$style.basketWrap, show?$style.active: '']">
 
     <div :class="$style.basket">
       <div :class="$style.titleBasket">
@@ -13,21 +13,28 @@
           <img src="@/images/close.png" alt="">
         </div>
       </div>
-
-      <div :class="$style.emptyBasket" v-if="basket.length === 0 && !success">
-        <div :class="$style.subTitle">
-          Пока что вы ничего не добавили
-          в корзину.
+      <client-only>
+        <div :class="$style.emptyBasket" v-if="basket.length === 0 && !success">
+          <div :class="$style.subTitle">
+            Пока что вы ничего не добавили
+            в корзину.
+          </div>
+          <div :class="$style.btnBasket">
+            <nuxt-link  to="/" @click="externalClick">
+              Перейти к выбору
+            </nuxt-link>
+          </div>
         </div>
-        <div :class="$style.btnBasket">
-          <nuxt-link  to="/" @click="externalClick">
-            Перейти к выбору
-          </nuxt-link>
-        </div>
-      </div>
 
-        <basket v-else :basket="basket" @order="orderSuccess">
+        <basket
+          v-else
+          :basket="basket"
+          @orderSuccess="orderSuccess"
+          @order="orderWait"
+        >
         </basket>
+      </client-only>
+
     </div>
   </div>
 </template>
@@ -59,7 +66,10 @@ export default {
       }
     },
     orderSuccess(){
-      this.success = !this.success;
+      this.success = true;
+    },
+    orderWait(){
+      this.success = false;
     }
   },
   created(){
@@ -68,16 +78,21 @@ export default {
 }
 </script>
 
-<style module>
+<style lang="scss" module>
   .basketWrap{
     position: fixed;
     top: 0;
-    right: 0;
+    right: -800px;
     width: 30%;
     background: #FFFFFF;
     box-shadow: -4px 0px 16px rgba(0, 0, 0, 0.05);
     border-radius: 8px 0px 0px 8px;
     height: 100%;
+    transition: transform 0.5s;
+
+    &.active{
+      transform: translateX(-800px);
+    }
   }
   .basket{
     padding: 2rem;
@@ -87,22 +102,21 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-  }
-  .titleBasket .title{
-    font-weight: bold;
-    font-size: 32px;
-    line-height: 41px;
-    margin-bottom: 20px;
+    .title{
+      font-weight: bold;
+      font-size: 32px;
+      line-height: 41px;
+      margin-bottom: 20px;
+    }
   }
   .emptyBasket{
-
-  }
-  .emptyBasket .subTitle{
-    font-weight: normal;
-    font-size: 22px;
-    line-height: 28px;
-    color: #000000;
-    margin-bottom: 20px;
+    .subTitle{
+      font-weight: normal;
+      font-size: 22px;
+      line-height: 28px;
+      color: #000000;
+      margin-bottom: 20px;
+    }
   }
 
   .close{
@@ -110,17 +124,17 @@ export default {
   }
   .btnBasket{
     width: 100%;
-    background: #1F1F1F;
+    background: $btn-color;
     border-radius: 8px;
     text-align: center;
     padding: 15px;
     cursor: pointer;
-  }
-  .btnBasket a{
-    color: #FFFFFF;
-    text-decoration: none;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 21px;
+    a{
+      color: $btn-text-color;
+      text-decoration: none;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 21px;
+    }
   }
 </style>

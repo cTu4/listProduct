@@ -5,14 +5,19 @@ export const state = () => ({
 export  const mutations = {
   setProducts(state,products){
     state.products = products;
+  },
+  update(state,data){
+    state.products[data.index] = data.product
   }
 }
 
 export const actions = {
   async fetch({commit}, data){
-    console.log(data.category_id)
     const products = await this.$axios.get('https://frontend-test.idaproject.com/api/product?category='+data.category_id);
     commit("setProducts", products.data);
+  },
+  update({commit},data){
+    commit("update", data);
   }
 }
 

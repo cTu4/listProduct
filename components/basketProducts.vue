@@ -6,7 +6,7 @@
     <div :class="$style.list">
       <div :class="$style.product" v-for="product in products" :key="product.id">
         <div :class="$style.image">
-          <img :src="'https://frontend-test.idaproject.com' + product.photo" alt="">
+          <img :src="url + product.photo" alt="">
         </div>
         <div :class="$style.productInfo">
           <div :class="$style.title">
@@ -16,7 +16,13 @@
             {{product.price}} ₽
           </div>
           <div :class="$style.rating">
-            {{product.rating}}
+            <div>
+              <img class="basketStar" src="@/images/star.png" alt="">
+            </div>
+            <div>
+              {{product.rating}}
+            </div>
+
           </div>
         </div>
         <div :class="$style.trash" @click="deleteFromBasket(product)">
@@ -35,7 +41,7 @@ export default {
   ],
   data(){
     return{
-
+      url: process.env.urlApi
     }
   },
   directives: {
@@ -44,7 +50,6 @@ export default {
   methods:{
     deleteFromBasket(product){
       this.$store.dispatch('basket/delete',product);
-      console.log(this.$store.getters['basket/basket'])
     }
   },
   created(){
@@ -53,72 +58,71 @@ export default {
 }
 </script>
 
-<style module>
+<style lang="scss" module>
   .basketProducts{
-
+    .title{
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 23px;
+      color: #59606D;
+    }
+    .list{
+      max-height: 400px;
+      overflow-y: auto;
+      margin: 0 -10px;
+      padding: 0 10px;
+      .product{
+        padding: 10px;
+        margin: 10px 0;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        height: 120px;
+        box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.05);
+        border-radius: 8px;
+        .image{
+          width: 30%;
+          img{
+            width: auto;
+            max-height: 90px;
+          }
+        }
+        .productInfo{
+          width: 50%;
+          font-weight: normal;
+          padding: 0 20px;
+          .title{
+            font-size: 14px;
+            line-height: 18px;
+            color: #59606D;
+            margin-bottom: 3px;
+          }
+          .price{
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 18px;
+            color: #1F1F1F;
+            margin-bottom: 6px;
+          }
+          .rating{
+            font-weight: bold;
+            font-size: 10px;
+            line-height: 13px;
+            color: #F2C94C;
+            display: flex;
+            align-items: center;
+          }
+        }
+        .trash{
+          width: 20%;
+          opacity: 0.2;
+          cursor: pointer;
+          &:hover{
+            opacity: 1;
+          }
+        }
+      }
+    }
   }
-  .basketProducts .title{
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 23px;
-    color: #59606D;
-  }
-  .basketProducts .list{
-    max-height: 340px;
-    overflow-y: scroll;
-    margin: 0 -10px;
-    padding: 0 10px;
-  }
-  .basketProducts .list .product{
-    padding: 10px;
-    margin: 10px 0;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    height: 100px;
-    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.05);
-    border-radius: 8px;
-  }
-  .list .product .image{
-    width: 30%;
-  }
-  .list .product .image img{
-    width: 100%;
-    height: auto;
-  }
-  .list .product .productInfo{
-    width: 50%;
-    font-weight: normal;
-    padding: 0 20px;
-  }
-  .list .product .productInfo .title{
-    font-size: 14px;
-    line-height: 18px;
-    color: #59606D;
-    margin-bottom: 3px;
-  }
-  .list .product .productInfo .price{
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 18px;
-    color: #1F1F1F;
-    margin-bottom: 6px;
-
-  }
-  .list .product .productInfo .rating{
-    font-weight: bold;
-    font-size: 10px;
-    line-height: 13px;
-    color: #F2C94C;
-  }
-  .list .product .trash{
-    width: 20%;
-    opacity: 0.2;
-    cursor: pointer;
-  }
-  .list .product .trash:hover{
-    opacity: 1;
-  }
-  /* width */
 
 </style>

@@ -24,7 +24,7 @@ export default {
     ]
   },
   env: {
-    urlApi: "https://frontend-test.idaproject.com/api/"
+    urlApi: "https://frontend-test.idaproject.com"
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -36,8 +36,8 @@ export default {
   plugins: [
     { src: "@/plugins/vClickOutside", ssr: true },
     {src: '@/plugins/vuelidate', ssr: true},
-    {src:'@/plugins/v-mask.js',ssr:true}
-
+    {src:'@/plugins/v-mask.js',ssr:true},
+    { src: '@/plugins/persistedState.client.js', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -50,8 +50,14 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    'nuxt-vuex-localstorage'
+    'nuxt-vuex-localstorage',
+    '@nuxtjs/style-resources'
   ],
+  styleResources: {
+    scss: [
+      '@/assets/scss/variables.scss',
+    ]
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},

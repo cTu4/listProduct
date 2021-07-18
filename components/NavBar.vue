@@ -22,7 +22,6 @@ export default {
   computed:{
     items(){
       let basket = this.$store.getters['basket/basket'];
-      console.log(basket.length !== 0)
       return basket.length;
     }
   },
@@ -34,7 +33,7 @@ export default {
 }
 </script>
 
-<style module>
+<style lang="scss" module>
 
   .NavBar{
     display: flex;
@@ -43,9 +42,10 @@ export default {
     border-radius: 0px 0px 8px 8px;
     align-items: center;
     padding: 20px 80px;
+    background: $bar-bg-color;
+
   }
   .list{
-    color: #59606D;
     font-weight: bold;
     font-size: 22px;
     line-height: 28px;

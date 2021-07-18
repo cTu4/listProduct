@@ -3,7 +3,7 @@
       <div :class="$style.title">
         Оформить заказ
       </div>
-    <form action="/" @submit.prevent="order">
+    <form @submit.prevent="order">
       <input
         v-model="name"
         type="text"
@@ -62,10 +62,6 @@
       >
     </form>
 
-    <div :class="[modal?'show':'']" class="alert alert-success alert-dismissible fade">
-      <strong>Ваш заказ отправлен!</strong>
-      <div type="button" class="close" @click="modal=!modal" data-dismiss="alert">&times;</div>
-    </div>
   </div>
 </template>
 
@@ -127,54 +123,53 @@ export default {
     }
   },
   created(){
-    console.log(this.$v)
   }
 }
 </script>
 
-<style module>
+<style lang="scss" module>
   .orderForm{
       margin-top: 30px;
-  }
-  .orderForm .title{
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 23px;
-    color: #59606D;
+    .title{
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 23px;
+      color: #59606D;
+    }
+    form{
+      display: flex;
+      flex-direction: column;
+      input{
+        background: #F8F8F8;
+        border-radius: 8px;
+        padding: 10px;
+        border: 0;
+        outline: none;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 21px;
+        color: #1F1F1F;
+        margin-top: 15px;
+        &.btnBasket{
+          width: 100%;
+          background: $btn-color;
+          color: $btn-text-color;
+          border-radius: 8px;
+          text-align: center;
+          padding: 15px;
+          cursor: pointer;
 
+        }
+        &.invalid{
+          border: $invalid-input-border-color 1px solid;
+          background: $invalid-input-bg-color;
+        }
+      }
+    }
   }
-  .orderForm form{
-    display: flex;
-    flex-direction: column;
-  }
-  .orderForm form input{
-    background: #F8F8F8;
-    border-radius: 8px;
-    padding: 10px;
-    border: 0;
-    outline: none;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 21px;
-    color: #1F1F1F;
-    margin-top: 15px;
-  }
-  .orderForm form input.btnBasket{
-    width: 100%;
-    background: #1F1F1F;
-    color: #FFFFFF;
-    border-radius: 8px;
-    text-align: center;
-    padding: 15px;
-    cursor: pointer;
 
-  }
-  .orderForm form input.invalid{
-    border: #fa6464 1px solid;
-    background: #ffc4c4;
-  }
   .textInvalid{
-    color:  #ff3e3e;
+    color:  $invalid-text-color;
   }
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {

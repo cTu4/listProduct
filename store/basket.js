@@ -1,3 +1,5 @@
+import myPlugin from '@/plugins/persistedState.client.js'
+
 export const state = () => ({
   basket: []
 })
@@ -31,3 +33,6 @@ export const actions = {
 export const getters = {
   basket: state => state.basket
 }
+
+
+export const plugins = [myPlugin]

@@ -1,3 +1,15 @@
+@font-face {
+  font-family: PT Sans;
+  src: url(@/static/fonts/PT_Sans/PTSans-Regular.ttf);
+}
+body{
+  font-family: PT Sans;
+  font-style: normal;
+  background: #FFFFFF;
+  width: 100%;
+  margin: 0;
+}
+
 .alert{
   min-height: 50px;
   position: fixed;
@@ -16,5 +28,15 @@
   //&.success{
   //  background: #9df89d;
   //}
+}
+input, select{
+  outline: none;
+}
+a{
+  text-decoration: none;
+  color: $link-color;
+}
+a:hover{
+  color: $link-hover-color;
 }
 

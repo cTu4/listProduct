@@ -1,18 +1,19 @@
 <template>
   <div>
-    <products :category_id="1"></products>
+    <products :category_id="$route.params.id"></products>
   </div>
 </template>
 
 <script>
 export default {
   layout: 'categories',
-  async fetch({store}){
+  async fetch({store,route}){
+    // console.log(route.params.id)
     if(store.getters['categories/categories'].length === 0){
       await store.dispatch('categories/fetch');
-      await store.dispatch('products/fetch',{
-        category_id:1
-      });
+      // await store.dispatch('products/fetch',{
+      //   category_id:1
+      // });
     }
 
   }
@@ -20,15 +21,5 @@ export default {
 </script>
 
 <style module>
-@font-face {
-  font-family: PT Sans;
-  src: url(/static/fonts/PT Sans/PTSans-Regular.ttf);
-}
-body{
-  font-family: PT Sans;
-  font-style: normal;
-  background: #FFFFFF;
-  width: 100%;
-  margin: 0;
-}
+
 </style>

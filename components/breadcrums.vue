@@ -36,4 +36,20 @@ export default {
     line-height: 41px;
     color: #1F1F1F;
   }
+  select{
+    border:none;
+    background: transparent;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 21px;
+    color: #59606D;
+    cursor: pointer;
+
+  }
+
+
+
+
+
+
 </style>

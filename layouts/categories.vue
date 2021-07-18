@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.categories_layout">
-    <div :style="{opacity: BasketIsOpen? 0.2 : 1}">
+    <div :style="{opacity: BasketIsOpen? 0.2 : 1, pointerEvents:BasketIsOpen? 'none' : ''}">
       <NavBar @basket="EventBasket"></NavBar>
       <breadcrums router="Каталог"></breadcrums>
       <main :class="$style.main">
